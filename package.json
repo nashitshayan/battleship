@@ -1,0 +1,31 @@
+{
+	"name": "battleship",
+	"version": "1.0.0",
+	"description": "Implementation of Battleship game using Test-Driven-Development",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest",
+		"watch": "jest --watch"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nashitshayan/battleship.git"
+	},
+	"keywords": [
+		"JS",
+		"TDD",
+		"Jest",
+		"HTML",
+		"CSS"
+	],
+	"author": "Nashit Shayan Khan",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/nashitshayan/battleship/issues"
+	},
+	"homepage": "https://github.com/nashitshayan/battleship#readme",
+	"devDependencies": {
+		"@babel/preset-env": "^7.18.10",
+		"jest": "^28.1.3"
+	}
+}
