@@ -1,13 +1,13 @@
 import { shipFactory } from './shipFactory';
 
 describe('Ship Factory', () => {
-	test('ship factory should NOT return a null object', () => {
+	test('ship should not be Null', () => {
 		expect(shipFactory()).not.toBeNull();
 	});
-	test('ship factory should return an object', () => {
+	test('ship should be an object', () => {
 		expect(typeof shipFactory()).toEqual('object');
 	});
-	test("ship factory should return an object with a 'body' array", () => {
+	test("ship should have a 'body' array", () => {
 		expect(Array.isArray(shipFactory(4).body)).toEqual(true);
 	});
 });
