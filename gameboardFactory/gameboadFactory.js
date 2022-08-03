@@ -1,3 +1,3 @@
 export const gameboardFactory = () => {
-	return;
+	return {};
 };
