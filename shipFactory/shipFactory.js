@@ -1,10 +1,10 @@
-export const shipFactory = (length) => {
-	const body = new Array(length).fill(0);
+export const shipFactory = (length, name) => {
+	const ship = new Array(length).fill(0);
 	const hit = (x) => {
-		if (x >= body.length) throw new Error();
-		body[x] = 'x';
-		return body;
+		if (x >= ship.length) throw new Error();
+		ship[x] = 'x';
+		return ship;
 	};
-	const isSunk = () => body.every((pos) => pos === 'x');
-	return { body, hit, isSunk };
+	const isSunk = () => ship.every((pos) => pos === 'x');
+	return { ship, name, hit, isSunk };
 };
