@@ -1,5 +1,5 @@
 export const shipFactory = (length, name) => {
-	const ship = new Array(length).fill(0);
+	const ship = new Array(length).fill(1);
 	const hit = (x) => {
 		if (x >= ship.length) throw new Error();
 		ship[x] = 'x';
