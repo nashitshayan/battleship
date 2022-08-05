@@ -1,10 +1,25 @@
+import { shipFactory } from '../shipFactory/shipFactory';
 export const gameboardFactory = () => {
 	//create a 2-d array filled with 0's. This will be our initial gameboard
-	const board = new Array(10).fill(new Array(10).fill(0));
+	const board = new Array(10).fill(new Array(10).fill(undefined));
 
 	const getBoard = () => board;
+	const placeShip = (shipType, coordinates) => {
+		const { name, axis, length } = shipType;
+		const [x_coord, y_coord] = coordinates;
 
-	return { getBoard };
+		if (axis === 'vertical') {
+			// board[i][y_coord]
+			for (let i = 0; i < length; i++) {
+				board[i][y_coord] = shipFactory(length, name);
+			}
+		}
+	};
+	const printBoard = () => {
+		const boardWithValues = board.map((row) => row.map((cell) => 0));
+		return boardWithValues;
+	};
+	return { getBoard, placeShip, printBoard };
 };
 
 /**
@@ -129,10 +144,10 @@ So, how will the placeShip function work?
 				gameboardFactory().placeShip({name: 'carrier', axis: 'vertical'}, 5,9);
 
 				expect(JSON.stringify(gameboardFactory().getBoard())).toEqual(
-				stringyfiedInitialGrid,
+				updatedGridStringyfied,
 				);
 			});
 		- change the ship factory
 			- remove the ship body
-			- 
+			- instead have a isHit variable, and return something like {isHit, hit, is}
  */

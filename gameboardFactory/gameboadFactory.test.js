@@ -20,8 +20,31 @@ describe('Gameboard Factory', () => {
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 		]);
-		expect(JSON.stringify(gameboardFactory().getBoard())).toEqual(
+		expect(JSON.stringify(gameboardFactory().printBoard())).toEqual(
 			stringyfiedInitialGrid,
+		);
+	});
+	test('placeShip should place a ship on the gameboard', () => {
+		let updatedGridStringyfied = JSON.stringify([
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		]);
+
+		gameboardFactory().placeShip(
+			{ name: 'carrier', axis: 'vertical', length: 5 },
+			[5, 9],
+		);
+
+		expect(JSON.stringify(gameboardFactory().printBoard())).toEqual(
+			updatedGridStringyfied,
 		);
 	});
 });
