@@ -1,15 +1,6 @@
 export const gameboardFactory = () => {
-	const rows = 10;
-	const cols = 10;
-	const board = [];
-
 	//create a 2-d array filled with 0's. This will be our initial gameboard
-	for (let i = 0; i < rows; i++) {
-		board[i] = [];
-		for (let j = 0; j < cols; j++) {
-			board[i].push(0);
-		}
-	}
+	const board = new Array(10).fill(new Array(10).fill(0));
 
 	const getBoard = () => board;
 
@@ -102,6 +93,12 @@ So, how will the placeShip function work?
 		- As for placing the ship on the board, I can iterate through the returned body array and mark the spots on the board with the values (1's). But then how to deal with hits and updating the board?
 		- the ship factory should take in Type and Length.
 
+	- Aug 5, 2022
+		- So Toby suggested that references of the ship object can be stored in the board cells. This changes things. Till now I thought of the ships being an array but now they can just be an object with 'hit' and 'type' properties. 
+			-eg: { hit: true, type: 'carrier'}
+		- The info about the ship length and their orientation would then be in passed to gameBoard or be in Gameboard. 
+		- So based on the type, length and orientation, placeShip can add that many ship objects on the board. 
+	
 
 	TODO:
 	-(DONE) test if gameboard factory returns a method that will give us an empty 10x10 board (filled with zeros)
@@ -135,27 +132,7 @@ So, how will the placeShip function work?
 				stringyfiedInitialGrid,
 				);
 			});
- */
-
-/**
- Hey, I'm on the battleship project and having some trouble figuring out how to 'place' the ships on the board.
-Here's what I've come up with so far, please let me know I'm heading in the wrong direction :
-```md
--- board is a 10x10 2d array, initially filled with 0's
--- the placeShip function takes in the shipType and co-ords (row and col number), calls shipFactory, places the ship on the board.
-  eg: This is how it should play out : Place a 'battleship (length 4)' at (4,5)
-      --[
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 1, 1, 1, 1, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-	]
--- The problem is that the ship factory is supposed to create the ship array right? How then, should this array be placed on the board? 
-``` 
+		- change the ship factory
+			- remove the ship body
+			- 
  */
