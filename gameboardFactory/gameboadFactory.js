@@ -1,22 +1,63 @@
 import { shipFactory } from '../shipFactory/shipFactory';
 export const gameboardFactory = () => {
+	const rows = 10;
+	const cols = 10;
+	const board = [];
 	//create a 2-d array filled with 0's. This will be our initial gameboard
-	const board = new Array(10).fill(new Array(10).fill(undefined));
+	for (let i = 0; i < rows; i++) {
+		board[i] = [];
+		for (let j = 0; j < cols; j++) {
+			board[i].push(0);
+		}
+	}
 
 	const getBoard = () => board;
 	const placeShip = (shipType, coordinates) => {
 		const { name, axis, length } = shipType;
 		const [x_coord, y_coord] = coordinates;
 
-		if (axis === 'vertical') {
-			// board[i][y_coord]
-			for (let i = 0; i < length; i++) {
-				board[i][y_coord] = shipFactory(length, name);
+		let count = 0;
+		let i = 1;
+		//regardless of axis, the ship has to be placed at (x,y)
+		board[x_coord][y_coord] = shipFactory(length, name);
+
+		while (count < length - 1) {
+			if (axis === 'vertical') {
+				if (x_coord - i >= 0) {
+					board[x_coord - i][y_coord] = shipFactory(length, name);
+					count++;
+					if (count >= length - 1) break;
+				}
+				if (x_coord + i < 10) {
+					board[x_coord + i][y_coord] = shipFactory(length, name);
+					count++;
+					if (count >= length - 1) break;
+				}
+				i++;
+			}
+			if (axis === 'horizontal') {
+				if (y_coord - i >= 0) {
+					board[x_coord][y_coord - i] = shipFactory(length, name);
+					count++;
+					if (count >= length - 1) break;
+				}
+				if (y_coord + i < 10) {
+					board[x_coord][y_coord + i] = shipFactory(length, name);
+					count++;
+					if (count >= length - 1) break;
+				}
+				i++;
 			}
 		}
+		return { printBoard };
 	};
 	const printBoard = () => {
-		const boardWithValues = board.map((row) => row.map((cell) => 0));
+		const boardWithValues = board.map((row) =>
+			row.map((cell) => {
+				if (cell) return cell.getShip()[0];
+				return cell;
+			}),
+		);
 		return boardWithValues;
 	};
 	return { getBoard, placeShip, printBoard };
@@ -66,7 +107,13 @@ So the assumption is that the ship factory doesn’t do anything else. Well then
 	- so the shipType array should be on gameController. We iterate through each ship and ask the player where to place it. 
 	- Player enters the co-ords and we call placeShip to add the ship and then we display the updated gameboard. Then repeat for each ship.
 	
-
+-- SHIP TYPES - Carrier(5), Battleship(4), Destroyer(3), Submarine(3), Patrol Boat(2)
+	- { name: 'carrier', axis: 'vertical', length: 5 }
+	- { name: 'battleship', axis: 'horizontal', length: 4 }
+	- { name: 'destroyer', axis: 'vertical', length: 3 }
+	- { name: 'submarine', axis: 'horizontal', length: 3 }
+	- { name: 'patrol boat', axis: 'horizontal', length: 2 }
+	
 So, how will the placeShip function work? 
 
 - The coordinates will basically be the row and col number.
@@ -74,7 +121,7 @@ So, how will the placeShip function work?
 - * the placeShip function takes in the coordinates and the ship type and places the ship on the board. 
 	- how will it place the ship on the board? Ship factory returns an object
 	- we also want the ship to occupy the cells on the board based on its length
-	- SHIP TYPES - Carrier(5), Battleship(4), Destroyer(3), Submarine(3), Patrol Boat(2)
+	
 	- also, some ships will be placed horizontally and others vertically. Gotta take care about that too. Hmm
 		- maybe shipTypes can be an array of OBJECTS
 		- eg: shipTypes= [{name: 'battleship', axis: 'horizontal'}, ...]
