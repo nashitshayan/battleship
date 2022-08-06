@@ -158,6 +158,21 @@ So, how will the placeShip function work?
 		- The info about the ship length and their orientation would then be in passed to gameBoard or be in Gameboard. 
 		- So based on the type, length and orientation, placeShip can add that many ship objects on the board. 
 	
+	- Aug 6, 2022
+		- I've successfully managed to 'place' ships- either horizontally or vertially. Yay.
+		- Now, the way TOP instructions have specified that shipFactory should have the hit and isSunk function doesn't makes sense to me. Having a ship body array seems useless and I an't figure out how I will register hits and make isSunk work.
+		- So I've decided to change stuff. 
+			- Ship factory now will only return an object like this : {isHit: false, name: 'carrier'}
+			- GameBoard will handle work like hit and isSunk
+			- So initially, placeShip is called with the starting coord and ship details, and it places the ship - references to the ship object
+			- Then when RecieveAtack takes the coords :
+				- it will check if at that particular position on the board there's an object reference or not. 
+					-If yes 
+						-It will call hit(obj), that will set 'isHit' of that object to 'true'
+						- After this it will call isSunk(shipName), that will check if all the ship objects with that name have sunk or not (isHit should be true for all)
+						- after that it will check if ALL the ship objects have sunk or not;
+					-If No
+						- it will mark that position on board as 'miss' or 'O'
 
 	TODO:
 	-(DONE) test if gameboard factory returns a method that will give us an empty 10x10 board (filled with zeros)
@@ -166,7 +181,7 @@ So, how will the placeShip function work?
 			- the return value will be a 2-d array filled with zeroes. Ofc another 2-d array filled with 0's will not be equal to this because js compares non-primitive values by reference. 
 			- lol, found a nice hack on stack overflow
 				- JSON.stringyfy the arrays and then compare!
-	- test the placeShip function
+	-(DONE)test the placeShip function
 		- how, lol?
 		- it's an incoming 'command' message, it changes the internal state but does not return anything back.
 		- maybe we call this function inside the test with the params and then expect the board to be filled with the ship
@@ -191,7 +206,13 @@ So, how will the placeShip function work?
 				updatedGridStringyfied,
 				);
 			});
-		- change the ship factory
-			- remove the ship body
-			- instead have a isHit variable, and return something like {isHit, hit, is}
+		
+	- Change ship factory to return object like {isHit: false, 'carrier'}
+	- Change/Remove the relevant tests for this as well
+	- Change the printBoard function to check if the element is an object or not, based on that print 'X' for hit and '1' for default. Rest elements should be '0' 
+	- Change/remove the relevant tests for this.
+	- Add test for Recieve attack 
+		- if hit, then printboard should show the updated board
+		- otherwise it should mark position as 'miss' (how will printBoard do this?)
+		- 
  */
