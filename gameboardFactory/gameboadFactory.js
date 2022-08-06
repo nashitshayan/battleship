@@ -16,38 +16,35 @@ export const gameboardFactory = () => {
 		const { name, axis, length } = shipType;
 		const [x_coord, y_coord] = coordinates;
 
-		let count = 0;
+		let count = 1;
 		let i = 1;
 		//regardless of axis, the ship has to be placed at (x,y)
 		board[x_coord][y_coord] = shipFactory(length, name);
+		// place ships two at a time,before and after the (x,y)
+		// If we reach the board end on that axis, then only place the ships in the opposite direction
+		while (count < length) {
+			if (axis === 'vertical') placeOnAxis(x_coord, 'vertical');
+			if (axis === 'horizontal') placeOnAxis(y_coord, 'horizontal');
+		}
 
-		while (count < length - 1) {
-			if (axis === 'vertical') {
-				if (x_coord - i >= 0) {
-					board[x_coord - i][y_coord] = shipFactory(length, name);
-					count++;
-					if (count >= length - 1) break;
-				}
-				if (x_coord + i < 10) {
-					board[x_coord + i][y_coord] = shipFactory(length, name);
-					count++;
-					if (count >= length - 1) break;
-				}
-				i++;
+		function placeOnAxis(coordinate, axis) {
+			if (coordinate - i >= 0) {
+				if (axis === 'vertical')
+					board[coordinate - i][y_coord] = shipFactory(length, name);
+				if (axis === 'horizontal')
+					board[x_coord][coordinate - i] = shipFactory(length, name);
+				count++;
+				if (count >= length) return;
 			}
-			if (axis === 'horizontal') {
-				if (y_coord - i >= 0) {
-					board[x_coord][y_coord - i] = shipFactory(length, name);
-					count++;
-					if (count >= length - 1) break;
-				}
-				if (y_coord + i < 10) {
-					board[x_coord][y_coord + i] = shipFactory(length, name);
-					count++;
-					if (count >= length - 1) break;
-				}
-				i++;
+			if (coordinate + i < 10) {
+				if (axis === 'vertical')
+					board[coordinate + i][y_coord] = shipFactory(length, name);
+				if (axis === 'horizontal')
+					board[x_coord][coordinate + i] = shipFactory(length, name);
+				count++;
+				if (count >= length) return;
 			}
+			i++;
 		}
 		return { printBoard };
 	};
