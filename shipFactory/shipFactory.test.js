@@ -8,13 +8,13 @@ describe('Ship Factory', () => {
 		expect(typeof shipFactory()).toEqual('object');
 	});
 	test("ship should have a 'ship' array", () => {
-		expect(Array.isArray(shipFactory().ship)).toEqual(true);
+		expect(Array.isArray(shipFactory().getShip())).toEqual(true);
 	});
 	test("shipFactory should take a 'length' and return a 'ship' array of that length", () => {
-		expect(shipFactory(4).ship.length).toEqual(4);
+		expect(shipFactory(4).getShip().length).toEqual(4);
 	});
 	test("shipFactory should take a 'name' and return an object with the name property", () => {
-		expect(shipFactory(4, 'battleship').name).toEqual('battleship');
+		expect(shipFactory(4, 'battleship').getName()).toEqual('battleship');
 	});
 	test("ship should have a 'hit' function that takes a value and marks that postion as 'x' ", () => {
 		expect(shipFactory(4).hit(2)[2]).toEqual('x');
