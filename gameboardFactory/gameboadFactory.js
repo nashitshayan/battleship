@@ -48,12 +48,21 @@ export const gameboardFactory = () => {
 		}
 	};
 	const hit = (ship) => (ship.isHit = true);
-	const isShipSunk = (shipName) => {
-		return board
-			.flat()
-			.filter((cell) => typeof cell === 'object' && cell.name === shipName)
-			.every((ship) => ship.isHit);
+	const isShipHit = (ship) => ship.isHit;
+	const getShipObjects = () => {
+		return board.flat().filter((cell) => typeof cell === 'object');
 	};
+
+	const isShipSunk = (shipName) => {
+		return getShipObjects()
+			.filter((cell) => cell.name === shipName)
+			.every(isShipHit);
+	};
+
+	const areAllShipsSunk = () => {
+		return getShipObjects().every(isShipHit);
+	};
+
 	const receiveAttack = (coordinates) => {
 		const [x_coord, y_coord] = coordinates;
 		if (typeof board[x_coord][y_coord] === 'object') {
@@ -61,7 +70,6 @@ export const gameboardFactory = () => {
 			hit(ship);
 		} else {
 			board[x_coord][y_coord] = 'o';
-			// ship.isMiss = true;
 		}
 	};
 	const getBoardWithValues = () => {
@@ -76,7 +84,14 @@ export const gameboardFactory = () => {
 		);
 		return boardWithValues;
 	};
-	return { getBoard, placeShip, getBoardWithValues, receiveAttack, isShipSunk };
+	return {
+		getBoard,
+		placeShip,
+		getBoardWithValues,
+		receiveAttack,
+		isShipSunk,
+		areAllShipsSunk,
+	};
 };
 
 /**
@@ -229,10 +244,9 @@ So, how will the placeShip function work?
 		
 	- (DONE) Change ship factory to return object like {isHit: false, 'carrier'}
 	- (DONE) Change/Remove the relevant tests for this as well
-	- Change the printBoard (update: renamed to getBoardWithValues) function to check if the element is an object or not, based on that print 'X' for hit and '1' for default. Rest elements should be '0' 
-	- Change/remove the relevant tests for this.
-	- Add test for Recieve attack 
-		- if hit, then printboard should show the updated board
-		- otherwise it should mark position as 'miss' (how will printBoard do this?)
-		- 
+	- (DONE) Change the printBoard (update: renamed to getBoardWithValues) function to check if the element is an object or not, based on that print 'X' for hit and '1' for default. Rest elements should be '0' 
+	- (DONE) Change/remove the relevant tests for this.
+	- (DONE) Add test for Recieve attack 
+	- (DONE) test isShipSunk
+	- (DONE) test areAllShipsSunk
  */

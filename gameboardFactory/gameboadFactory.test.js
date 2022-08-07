@@ -171,27 +171,60 @@ describe('Gameboard Factory', () => {
 		receiveAttack([2, 2]);
 		expect(getBoardWithValues()).toEqual(updatedGrid);
 	});
-	test("recieveAttack function should take coordinates and mark 'x' for hit", () => {
-		let updatedGrid = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 'x', 'x', 'x', 'x'],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		];
+	test('isShipSunk function should report if a particular ship has sunk or not', () => {
+		// let updatedGrid = [
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 'x', 'x', 'x', 'x'],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// ];
 		const gameboard = gameboardFactory();
-		const { placeShip, getBoardWithValues, receiveAttack, isShipSunk } =
-			gameboard;
+		const { placeShip, receiveAttack, isShipSunk } = gameboard;
 		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
 		receiveAttack([1, 6]);
 		receiveAttack([1, 7]);
 		receiveAttack([1, 8]);
 		receiveAttack([1, 9]);
 		expect(isShipSunk('battleship')).toEqual(true);
+	});
+	test('areAllShipsSunk should function report if all ships on the board have been sunk or not', () => {
+		// let updatedGrid = [
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 'x', 'x', 'x', 'x'],
+		// 	[0, 'x', 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 'x', 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 'x', 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 'x', 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 'x', 0, 'x', 'x', 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		// ];
+		const gameboard = gameboardFactory();
+		const { placeShip, receiveAttack, areAllShipsSunk } = gameboard;
+		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
+		placeShip({ name: 'carrier', axis: 'vertical', length: 5 }, [4, 1]);
+		placeShip({ name: 'patrol boat', axis: 'horizontal', length: 2 }, [6, 4]);
+		receiveAttack([1, 6]);
+		receiveAttack([1, 7]);
+		receiveAttack([1, 8]);
+		receiveAttack([1, 9]);
+
+		receiveAttack([2, 1]);
+		receiveAttack([3, 1]);
+		receiveAttack([4, 1]);
+		receiveAttack([5, 1]);
+		receiveAttack([6, 1]);
+
+		receiveAttack([6, 3]);
+		receiveAttack([6, 4]);
+
+		expect(areAllShipsSunk()).toEqual(true);
 	});
 });
