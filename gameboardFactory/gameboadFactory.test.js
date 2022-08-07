@@ -133,4 +133,65 @@ describe('Gameboard Factory', () => {
 		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
 		expect(getBoardWithValues()).toEqual(updatedGrid);
 	});
+	test("recieveAttack function should take coordinates and mark 'x' for hit", () => {
+		let updatedGrid = [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 'x', 1, 1, 1],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		];
+		const gameboard = gameboardFactory();
+		const { placeShip, getBoardWithValues, receiveAttack } = gameboard;
+		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
+		receiveAttack([1, 6]);
+		expect(getBoardWithValues()).toEqual(updatedGrid);
+	});
+	test("recieveAttack function should take coordinates and mark 'o' for miss", () => {
+		let updatedGrid = [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+			[0, 0, 'o', 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		];
+		const gameboard = gameboardFactory();
+		const { placeShip, getBoardWithValues, receiveAttack } = gameboard;
+		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
+		receiveAttack([2, 2]);
+		expect(getBoardWithValues()).toEqual(updatedGrid);
+	});
+	test("recieveAttack function should take coordinates and mark 'x' for hit", () => {
+		let updatedGrid = [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 'x', 'x', 'x', 'x'],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+		];
+		const gameboard = gameboardFactory();
+		const { placeShip, getBoardWithValues, receiveAttack, isShipSunk } =
+			gameboard;
+		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
+		receiveAttack([1, 6]);
+		receiveAttack([1, 7]);
+		receiveAttack([1, 8]);
+		receiveAttack([1, 9]);
+		expect(isShipSunk('battleship')).toEqual(true);
+	});
 });

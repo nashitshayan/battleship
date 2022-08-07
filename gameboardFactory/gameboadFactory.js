@@ -7,7 +7,7 @@ export const gameboardFactory = () => {
 	for (let i = 0; i < rows; i++) {
 		board[i] = [];
 		for (let j = 0; j < cols; j++) {
-			board[i].push(0);
+			board[i].push(undefined);
 		}
 	}
 
@@ -30,33 +30,53 @@ export const gameboardFactory = () => {
 		function placeOnAxis(coordinate, axis) {
 			if (coordinate - i >= 0) {
 				if (axis === 'vertical')
-					board[coordinate - i][y_coord] = shipFactory(length, name);
+					board[coordinate - i][y_coord] = shipFactory(name);
 				if (axis === 'horizontal')
-					board[x_coord][coordinate - i] = shipFactory(length, name);
+					board[x_coord][coordinate - i] = shipFactory(name);
 				count++;
 				if (count >= length) return;
 			}
 			if (coordinate + i < 10) {
 				if (axis === 'vertical')
-					board[coordinate + i][y_coord] = shipFactory(length, name);
+					board[coordinate + i][y_coord] = shipFactory(name);
 				if (axis === 'horizontal')
-					board[x_coord][coordinate + i] = shipFactory(length, name);
+					board[x_coord][coordinate + i] = shipFactory(name);
 				count++;
 				if (count >= length) return;
 			}
 			i++;
 		}
 	};
+	const hit = (ship) => (ship.isHit = true);
+	const isShipSunk = (shipName) => {
+		return board
+			.flat()
+			.filter((cell) => typeof cell === 'object' && cell.name === shipName)
+			.every((ship) => ship.isHit);
+	};
+	const receiveAttack = (coordinates) => {
+		const [x_coord, y_coord] = coordinates;
+		if (typeof board[x_coord][y_coord] === 'object') {
+			const ship = board[x_coord][y_coord];
+			hit(ship);
+		} else {
+			board[x_coord][y_coord] = 'o';
+			// ship.isMiss = true;
+		}
+	};
 	const getBoardWithValues = () => {
 		const boardWithValues = board.map((row) =>
 			row.map((cell) => {
-				if (cell) return cell.getShip()[0];
-				return cell;
+				if (cell) {
+					const value = cell.isHit ? 'x' : cell === 'o' ? 'o' : 1;
+					return value;
+				}
+				return 0;
 			}),
 		);
 		return boardWithValues;
 	};
-	return { getBoard, placeShip, getBoardWithValues };
+	return { getBoard, placeShip, getBoardWithValues, receiveAttack, isShipSunk };
 };
 
 /**
@@ -207,9 +227,9 @@ So, how will the placeShip function work?
 				);
 			});
 		
-	- Change ship factory to return object like {isHit: false, 'carrier'}
-	- Change/Remove the relevant tests for this as well
-	- Change the printBoard function to check if the element is an object or not, based on that print 'X' for hit and '1' for default. Rest elements should be '0' 
+	- (DONE) Change ship factory to return object like {isHit: false, 'carrier'}
+	- (DONE) Change/Remove the relevant tests for this as well
+	- Change the printBoard (update: renamed to getBoardWithValues) function to check if the element is an object or not, based on that print 'X' for hit and '1' for default. Rest elements should be '0' 
 	- Change/remove the relevant tests for this.
 	- Add test for Recieve attack 
 		- if hit, then printboard should show the updated board
