@@ -46,9 +46,8 @@ export const gameboardFactory = () => {
 			}
 			i++;
 		}
-		return { printBoard };
 	};
-	const printBoard = () => {
+	const getBoardWithValues = () => {
 		const boardWithValues = board.map((row) =>
 			row.map((cell) => {
 				if (cell) return cell.getShip()[0];
@@ -57,7 +56,7 @@ export const gameboardFactory = () => {
 		);
 		return boardWithValues;
 	};
-	return { getBoard, placeShip, printBoard };
+	return { getBoard, placeShip, getBoardWithValues };
 };
 
 /**
@@ -65,6 +64,7 @@ Gameboard factory:
 After reading Bender’s Connect Four article, I got some ideas. The Gameboard will be a 2-d array, and it will call the ship factory and place the ships on the board. 
 - So the gameboard factory can start off as something like this :
 - (I realised later that I wrote the code here before the test lol)
+
 ```
 const gameboardFactory= (){
 	const rows= 10;
@@ -187,7 +187,7 @@ So, how will the placeShip function work?
 		- maybe we call this function inside the test with the params and then expect the board to be filled with the ship
 		- eg: 
 			test('placeShip should place a ship on the gameboard', () => {
-				let updatedGridStringyfied = JSON.stringify([
+				let updatedGrid = ([
 				[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
 				[0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
@@ -202,8 +202,8 @@ So, how will the placeShip function work?
 				
 				gameboardFactory().placeShip({name: 'carrier', axis: 'vertical'}, 5,9);
 
-				expect(JSON.stringify(gameboardFactory().getBoard())).toEqual(
-				updatedGridStringyfied,
+				expect((gameboardFactory().getBoard())).toEqual(
+				updatedGrid,
 				);
 			});
 		
