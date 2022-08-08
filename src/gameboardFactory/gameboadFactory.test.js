@@ -24,169 +24,65 @@ describe('Gameboard Factory', () => {
 		const { getBoardWithValues } = gameboard;
 		expect(getBoardWithValues()).toEqual(initialGrid);
 	});
-	test('placeShip should place a ship vertically on the gameboard, evenly extending it on the x axis around x-coord', () => {
-		let updatedGrid = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		];
+	test('placeShip should place a ship vertically on the gameboard, top-to-down from the chosen coordinate', () => {
 		const gameboard = gameboardFactory();
 		const { placeShip, getBoardWithValues } = gameboard;
-		placeShip({ name: 'carrier', axis: 'vertical', length: 5 }, [4, 2]);
-		expect(getBoardWithValues()).toEqual(updatedGrid);
+		placeShip({ name: 'carrier', axis: 'vertical', length: 5 }, [2, 2]);
+		expect(getBoardWithValues()[2][2]).toEqual(1);
+		expect(getBoardWithValues()[3][2]).toEqual(1);
+		expect(getBoardWithValues()[4][2]).toEqual(1);
+		expect(getBoardWithValues()[5][2]).toEqual(1);
+		expect(getBoardWithValues()[6][2]).toEqual(1);
 	});
-	test('When placing the ship vertically, extend the ship correctly along x-axis when x-coord is closer to 10', () => {
-		let updatedGrid = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-		];
-		const gameboard = gameboardFactory();
-		const { placeShip, getBoardWithValues } = gameboard;
-		placeShip({ name: 'carrier', axis: 'vertical', length: 5 }, [8, 1]);
-		expect(getBoardWithValues()).toEqual(updatedGrid);
-	});
-	test('When placing the ship vertically, extend the ship correctly along x-axis when x-coord is closer to 10', () => {
-		let updatedGrid = [
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		];
-		const gameboard = gameboardFactory();
-		const { placeShip, getBoardWithValues } = gameboard;
-		placeShip({ name: 'carrier', axis: 'vertical', length: 5 }, [1, 1]);
-		expect(getBoardWithValues()).toEqual(updatedGrid);
-	});
-	// //hori
-	test('placeShip should place a ship horizontally on the gameboard, evenly extending it on the y-axis around y-coord', () => {
-		let updatedGrid = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 1, 1, 1, 1, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		];
-		const gameboard = gameboardFactory();
-		const { placeShip, getBoardWithValues } = gameboard;
-		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 3]);
-		expect(getBoardWithValues()).toEqual(updatedGrid);
-	});
-	test('When placing the ship horizontally, extend the ship correctly along y-axis when y-coord is closer to 10', () => {
-		let updatedGrid = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		];
+
+	test('placeShip should place a ship horizontally on the gameboard, left-to-right from the chosen coordinate', () => {
 		const gameboard = gameboardFactory();
 		const { placeShip, getBoardWithValues } = gameboard;
 		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 1]);
-		expect(getBoardWithValues()).toEqual(updatedGrid);
+		expect(getBoardWithValues()[1][1]).toEqual(1);
+		expect(getBoardWithValues()[1][2]).toEqual(1);
+		expect(getBoardWithValues()[1][3]).toEqual(1);
+		expect(getBoardWithValues()[1][4]).toEqual(1);
 	});
-	test('When placing the ship horizontally, extend the ship correctly along y-axis when y-coord is closer to 0', () => {
-		let updatedGrid = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		];
+	test("When placing the ship vertically, if another ship object is encountered, then don't place any ships", () => {
 		const gameboard = gameboardFactory();
 		const { placeShip, getBoardWithValues } = gameboard;
-		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
-		expect(getBoardWithValues()).toEqual(updatedGrid);
+		placeShip({ name: 'destroyer', axis: 'horizontal', length: 3 }, [4, 1]);
+		placeShip({ name: 'carrier', axis: 'vertical', length: 5 }, [2, 1]);
+		expect(getBoardWithValues()[2][1]).toEqual(0);
+		expect(getBoardWithValues()[3][1]).toEqual(0);
+		// not checking [4][1] because destroyer will be there
+		expect(getBoardWithValues()[5][1]).toEqual(0);
+		expect(getBoardWithValues()[6][1]).toEqual(0);
 	});
+	test("When placing the ship horizontally, if another ship object is encountered, then don't place any ships", () => {
+		const gameboard = gameboardFactory();
+		const { placeShip, getBoardWithValues } = gameboard;
+		placeShip({ name: 'carrier', axis: 'vertical', length: 5 }, [2, 1]); // (2,1),(3,1),(4,1),(5,1),(6,1)
+		placeShip({ name: 'destroyer', axis: 'horizontal', length: 3 }, [3, 0]);
+		expect(getBoardWithValues()[3][0]).toEqual(0);
+		// not checking (3,1) because carrier will be there
+		expect(getBoardWithValues()[3][2]).toEqual(0);
+	});
+
 	test("recieveAttack function should take coordinates and mark 'x' for hit", () => {
-		let updatedGrid = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 'x', 1, 1, 1],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		];
 		const gameboard = gameboardFactory();
 		const { placeShip, getBoardWithValues, receiveAttack } = gameboard;
-		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
+		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 6]);
 		receiveAttack([1, 6]);
-		expect(getBoardWithValues()).toEqual(updatedGrid);
+		expect(getBoardWithValues()[1][6]).toEqual('x');
 	});
 	test("recieveAttack function should take coordinates and mark 'o' for miss", () => {
-		let updatedGrid = [
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 1, 1, 1, 1],
-			[0, 0, 'o', 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		];
 		const gameboard = gameboardFactory();
 		const { placeShip, getBoardWithValues, receiveAttack } = gameboard;
-		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
+		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 6]);
 		receiveAttack([2, 2]);
-		expect(getBoardWithValues()).toEqual(updatedGrid);
+		expect(getBoardWithValues()[2][2]).toEqual('o');
 	});
 	test('isShipSunk function should report if a particular ship has sunk or not', () => {
-		// let updatedGrid = [
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 'x', 'x', 'x', 'x'],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// ];
 		const gameboard = gameboardFactory();
 		const { placeShip, receiveAttack, isShipSunk } = gameboard;
-		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
+		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 6]);
 		receiveAttack([1, 6]);
 		receiveAttack([1, 7]);
 		receiveAttack([1, 8]);
@@ -194,23 +90,11 @@ describe('Gameboard Factory', () => {
 		expect(isShipSunk('battleship')).toEqual(true);
 	});
 	test('areAllShipsSunk should function report if all ships on the board have been sunk or not', () => {
-		// let updatedGrid = [
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 'x', 'x', 'x', 'x'],
-		// 	[0, 'x', 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 'x', 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 'x', 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 'x', 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 'x', 0, 'x', 'x', 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-		// ];
 		const gameboard = gameboardFactory();
 		const { placeShip, receiveAttack, areAllShipsSunk } = gameboard;
-		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 8]);
-		placeShip({ name: 'carrier', axis: 'vertical', length: 5 }, [4, 1]);
-		placeShip({ name: 'patrol boat', axis: 'horizontal', length: 2 }, [6, 4]);
+		placeShip({ name: 'battleship', axis: 'horizontal', length: 4 }, [1, 6]);
+		placeShip({ name: 'carrier', axis: 'vertical', length: 5 }, [2, 1]);
+		placeShip({ name: 'patrol boat', axis: 'horizontal', length: 2 }, [6, 3]);
 		receiveAttack([1, 6]);
 		receiveAttack([1, 7]);
 		receiveAttack([1, 8]);
