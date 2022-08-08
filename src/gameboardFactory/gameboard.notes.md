@@ -170,7 +170,7 @@ So based on the type, length and orientation, placeShip can add that many ship o
 
 #### TODOs
 
-- [x] change/remove relevant tests
+- [x] change/remove relevant tests for placeShip functionality
 - [x] re rewrite the placeship logic with new approach
 - [x] handle board-edge and ship-overlap cases
 - [x] refactor if possible
