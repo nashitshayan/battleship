@@ -46,8 +46,8 @@ export const gameController = (
 		[6, 7],
 		[0, 0],
 	];
-	placeShips(playerOneBoard, p1Coords);
-	placeShips(playerTwoBoard, p2Coords);
+	const placeDummyShipsPlayerOne = () => placeShips(playerOneBoard, p1Coords);
+	const placeDummyShipsPlayerTwo = () => placeShips(playerTwoBoard, p2Coords);
 	const playRound = (coords) => {
 		if (activePlayer.name === 'CPU') {
 		} else {
@@ -58,6 +58,8 @@ export const gameController = (
 	return {
 		getPlayerOneBoard: playerOneBoard.getBoardWithValues,
 		getPlayerTwoBoard: playerTwoBoard.getBoardWithValues,
+		placeDummyShipsPlayerOne,
+		placeDummyShipsPlayerTwo,
 		getActivePlayer,
 		switchTurn,
 		playRound,

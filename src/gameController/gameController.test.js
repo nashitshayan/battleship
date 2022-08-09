@@ -21,8 +21,8 @@ describe('Game Controller', () => {
 			[0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
 		];
 		const game = gameController();
-		const { getPlayerOneBoard } = game;
-
+		const { getPlayerOneBoard, placeDummyShipsPlayerOne } = game;
+		placeDummyShipsPlayerOne();
 		expect(getPlayerOneBoard()).toEqual(initialPlayerOneBoard);
 	});
 	test('correctly place ships on playerTwoBoard', () => {
@@ -40,8 +40,8 @@ describe('Game Controller', () => {
 		];
 
 		const game = gameController();
-		const { getPlayerTwoBoard } = game;
-
+		const { getPlayerTwoBoard, placeDummyShipsPlayerTwo } = game;
+		placeDummyShipsPlayerTwo();
 		expect(getPlayerTwoBoard()).toEqual(initialPlayerTwoBoard);
 	});
 	test('gameController should expose a function to switch player turn', () => {
@@ -54,13 +54,15 @@ describe('Game Controller', () => {
 	//test playerRound function -> when it is playerOne's turns, it allows playerOne to send an attack to playeTwoBoard. Test that the attack is registered by checking the playerTwoBoard
 	test("When playerOne attacks, mark enemy board as 'x' when hit", () => {
 		const game = gameController('Nashit');
-		const { playRound, getPlayerTwoBoard } = game;
+		const { playRound, getPlayerTwoBoard, placeDummyShipsPlayerTwo } = game;
+		placeDummyShipsPlayerTwo();
 		playRound([0, 0]);
 		expect(getPlayerTwoBoard()[0][0]).toEqual('x');
 	});
 	test("When playerOne attacks, mark enemy board as 'o' when miss", () => {
 		const game = gameController('Nashit');
-		const { playRound, getPlayerTwoBoard } = game;
+		const { playRound, getPlayerTwoBoard, placeDummyShipsPlayerTwo } = game;
+		placeDummyShipsPlayerTwo();
 		playRound([1, 1]);
 		expect(getPlayerTwoBoard()[1][1]).toEqual('o');
 	});
