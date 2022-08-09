@@ -51,4 +51,24 @@ describe('Game Controller', () => {
 		switchTurn();
 		expect(getActivePlayer().name).toEqual('CPU');
 	});
+	//test playerRound function -> when it is playerOne's turns, it allows playerOne to send an attack to playeTwoBoard. Test that the attack is registered by checking the playerTwoBoard
+	test("When playerOne attacks, mark enemy board as 'x' when hit", () => {
+		const game = gameController('Nashit');
+		const { playRound, getPlayerTwoBoard } = game;
+		playRound([0, 0]);
+		expect(getPlayerTwoBoard()[0][0]).toEqual('x');
+	});
+	test("When playerOne attacks, mark enemy board as 'o' when miss", () => {
+		const game = gameController('Nashit');
+		const { playRound, getPlayerTwoBoard } = game;
+		playRound([1, 1]);
+		expect(getPlayerTwoBoard()[1][1]).toEqual('o');
+	});
+	test.skip("When CPU attacks, mark enemy board as 'x' when hit", () => {
+		const game = gameController('Nashit');
+		const { playRound, getPlayerOneBoard, switchTurn } = game;
+		switchTurn();
+		playRound([1, 1]);
+		//expect(getPlayerOneBoard()[1][1]).toEqual('o');
+	});
 });

@@ -10,6 +10,9 @@ export const gameController = (
 		{ name: 'submarine', axis: 'horizontal', length: 3 },
 		{ name: 'patrol boat', axis: 'horizontal', length: 2 },
 	];
+	const playerOneBoard = gameboardFactory();
+	const playerTwoBoard = gameboardFactory();
+
 	const players = [
 		{
 			name: playerOneName,
@@ -23,9 +26,6 @@ export const gameController = (
 		activePlayer = activePlayer === players[0] ? players[1] : players[0];
 	};
 	const getActivePlayer = () => activePlayer;
-
-	const playerOneBoard = gameboardFactory();
-	const playerTwoBoard = gameboardFactory();
 
 	const placeShips = (board, coords) => {
 		ships.forEach((ship, index) => {
@@ -48,11 +48,18 @@ export const gameController = (
 	];
 	placeShips(playerOneBoard, p1Coords);
 	placeShips(playerTwoBoard, p2Coords);
-
+	const playRound = (coords) => {
+		if (activePlayer.name === 'CPU') {
+		} else {
+			playerTwoBoard.receiveAttack(coords);
+		}
+		switchTurn();
+	};
 	return {
 		getPlayerOneBoard: playerOneBoard.getBoardWithValues,
 		getPlayerTwoBoard: playerTwoBoard.getBoardWithValues,
 		getActivePlayer,
 		switchTurn,
+		playRound,
 	};
 };
