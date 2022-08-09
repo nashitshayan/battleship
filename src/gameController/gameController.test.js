@@ -44,4 +44,11 @@ describe('Game Controller', () => {
 
 		expect(getPlayerTwoBoard()).toEqual(initialPlayerTwoBoard);
 	});
+	test('gameController should expose a function to switch player turn', () => {
+		const game = gameController('Nashit');
+		const { switchTurn, getActivePlayer } = game;
+		expect(getActivePlayer().name).toEqual('Nashit');
+		switchTurn();
+		expect(getActivePlayer().name).toEqual('CPU');
+	});
 });

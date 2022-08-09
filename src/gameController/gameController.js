@@ -18,7 +18,10 @@ export const gameController = (
 			name: playerTwoName,
 		},
 	];
-	const activePlayer = players[0];
+	let activePlayer = players[0];
+	const switchTurn = () => {
+		activePlayer = activePlayer === players[0] ? players[1] : players[0];
+	};
 	const getActivePlayer = () => activePlayer;
 
 	const playerOneBoard = gameboardFactory();
@@ -49,5 +52,7 @@ export const gameController = (
 	return {
 		getPlayerOneBoard: playerOneBoard.getBoardWithValues,
 		getPlayerTwoBoard: playerTwoBoard.getBoardWithValues,
+		getActivePlayer,
+		switchTurn,
 	};
 };
