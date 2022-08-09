@@ -197,6 +197,6 @@ So I've decided that I don't need a player factory. Instead all this would be ma
 - [x] test that ships have been placed on playerOneBoard
 - [x] test that ships have been placed on playerTwoBoard
 - [x] test switchTurn function
-- [] test cpu play function
-- [] test playerRound function -> when it is playerOne's turns, it allows playerOne to send an attack to playeTwoBoard. Test that the attack is registered by checking the playerTwoBoard
-- [] test playerRound function -> when it is playerTwo's turns, it allows playerTwo to send an attack to playerOneBoard. Test that the attack is registered by checking the playerTwoBoard
+- [x] test cpu play function
+- [x] test playerRound function -> when it is playerOne's turns, it allows playerOne to send an attack to playeTwoBoard. Test that the attack is registered by checking the playerTwoBoard
+- [x] test playerRound function -> when it is playerTwo's turns, it allows playerTwo to send an attack to playerOneBoard. Test that the attack is registered by checking the playerTwoBoard

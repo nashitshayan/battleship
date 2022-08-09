@@ -51,6 +51,11 @@ export const gameController = (
 	const placeDummyShipsPlayerOne = () => placeShips(playerOneBoard, p1Coords);
 	const placeDummyShipsPlayerTwo = () => placeShips(playerTwoBoard, p2Coords);
 
+	const printNewRound = () => {
+		console.log(`${activePlayer.name}'s board`);
+		console.log(activePlayer.board.getBoardWithValues());
+		console.log(`${activePlayer.name}'s turn`);
+	};
 	const playRound = (coords) => {
 		if (activePlayer.name === 'CPU') {
 			cpuPlay(playerOneBoard);
@@ -58,6 +63,7 @@ export const gameController = (
 			attackBoard(playerTwoBoard, coords);
 		}
 		switchTurn();
+		printNewRound();
 	};
 
 	const getRandomCoords = () => [randomNumber(), randomNumber()];
