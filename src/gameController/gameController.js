@@ -63,7 +63,7 @@ export const gameController = (
 			attackBoard(playerTwoBoard, coords);
 		}
 		switchTurn();
-		printNewRound();
+		//printNewRound();
 	};
 
 	const getRandomCoords = () => [randomNumber(), randomNumber()];

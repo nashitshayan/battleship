@@ -51,7 +51,6 @@ describe('Game Controller', () => {
 		switchTurn();
 		expect(getActivePlayer().name).toEqual('CPU');
 	});
-	//test playerRound function -> when it is playerOne's turns, it allows playerOne to send an attack to playeTwoBoard. Test that the attack is registered by checking the playerTwoBoard
 	test("When playerOne attacks, mark enemy board as 'x' when hit", () => {
 		const game = gameController('Nashit');
 		const { playRound, getPlayerTwoBoard, placeDummyShipsPlayerTwo } = game;
