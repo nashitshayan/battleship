@@ -55,6 +55,9 @@ export const gameController = (
 		}
 		switchTurn();
 	};
+
+	const getRandomCoords = () => [randomNumber(), randomNumber()];
+
 	return {
 		getPlayerOneBoard: playerOneBoard.getBoardWithValues,
 		getPlayerTwoBoard: playerTwoBoard.getBoardWithValues,
@@ -63,5 +66,10 @@ export const gameController = (
 		getActivePlayer,
 		switchTurn,
 		playRound,
+		getRandomCoords,
 	};
 };
+
+function randomNumber() {
+	return Math.floor(Math.random() * 10);
+}

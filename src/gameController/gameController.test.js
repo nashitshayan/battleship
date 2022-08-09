@@ -66,11 +66,11 @@ describe('Game Controller', () => {
 		playRound([1, 1]);
 		expect(getPlayerTwoBoard()[1][1]).toEqual('o');
 	});
-	test.skip("When CPU attacks, mark enemy board as 'x' when hit", () => {
+	test('CPU should be able to pick a random coordinate', () => {
 		const game = gameController('Nashit');
-		const { playRound, getPlayerOneBoard, switchTurn } = game;
+		const { switchTurn, getRandomCoords, getPlayerOneBoard } = game;
 		switchTurn();
-		playRound([1, 1]);
-		//expect(getPlayerOneBoard()[1][1]).toEqual('o');
+		const [x, y] = getRandomCoords();
+		expect(getPlayerOneBoard()[x][y]).toEqual(0);
 	});
 });
