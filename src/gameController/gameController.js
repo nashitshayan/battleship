@@ -16,9 +16,11 @@ export const gameController = (
 	const players = [
 		{
 			name: playerOneName,
+			board: playerOneBoard,
 		},
 		{
 			name: playerTwoName,
+			board: playerTwoBoard,
 		},
 	];
 	let activePlayer = players[0];
@@ -48,16 +50,26 @@ export const gameController = (
 	];
 	const placeDummyShipsPlayerOne = () => placeShips(playerOneBoard, p1Coords);
 	const placeDummyShipsPlayerTwo = () => placeShips(playerTwoBoard, p2Coords);
+
 	const playRound = (coords) => {
 		if (activePlayer.name === 'CPU') {
+			cpuPlay(playerOneBoard);
 		} else {
-			playerTwoBoard.receiveAttack(coords);
+			attackBoard(playerTwoBoard, coords);
 		}
 		switchTurn();
 	};
 
 	const getRandomCoords = () => [randomNumber(), randomNumber()];
-
+	const attackBoard = (board, coords) => board.receiveAttack(coords);
+	const cpuPlay = (board) => {
+		const alreadyTargeted = [];
+		let randomCoords = getRandomCoords();
+		while (alreadyTargeted.includes(randomCoords))
+			randomCoords = getRandomCoords();
+		attackBoard(board, randomCoords);
+		alreadyTargeted.push(randomCoords);
+	};
 	return {
 		getPlayerOneBoard: playerOneBoard.getBoardWithValues,
 		getPlayerTwoBoard: playerTwoBoard.getBoardWithValues,
