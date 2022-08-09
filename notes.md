@@ -175,3 +175,28 @@ So based on the type, length and orientation, placeShip can add that many ship o
 - [x] handle board-edge and ship-overlap cases
 - [x] refactor if possible
 - [x] make all tests pass
+
+## Aug 09, 2022
+
+So I've decided that I don't need a player factory. Instead all this would be managed inside the gameController. Things that gameController should :
+
+- have an array of ships with their details.
+- Make gameboard for playerOne
+- Populate playerOneBoard
+- Make gameboard for playerTwo (CPU)
+- Populate playerTwoBoard
+- Have an active player
+- Have a function to switch the active player
+- Have a function to get active player (return this)
+- Have a printRound function
+- Have a playround function (return this)
+- Have a function that allows CPU to make legal random plays
+
+#### TODOs:
+
+- [x] test that ships have been placed on playerOneBoard
+- [x] test that ships have been placed on playerTwoBoard
+- [] test switchTurn function
+- [] test cpu play function
+- [] test playerRound function -> when it is playerOne's turns, it allows playerOne to send an attack to playeTwoBoard. Test that the attack is registered by checking the playerTwoBoard
+- [] test playerRound function -> when it is playerTwo's turns, it allows playerTwo to send an attack to playerOneBoard. Test that the attack is registered by checking the playerTwoBoard
