@@ -1,8 +1,6 @@
 import { gameController } from './gameController/gameController';
+import { setupDOM } from './setupDOM/setupDOM';
+import './css/styles.css';
 (() => {
-	// const game = gameController();
-	// game.placeDummyShipsPlayerOne();
-	// game.placeDummyShipsPlayerTwo();
-	// game.playRound([1, 1]);
-	// game.playRound([2, 5]);
+	document.body.append(...setupDOM());
 })();

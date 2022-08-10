@@ -209,6 +209,16 @@ I need to start with the UI now. There will be a screenController that will buil
 - have an updateScreen method to re render the boards with updated data
 - add event listener on the player board
 
+The setupDOM module should :
+
+- make containers for header, boards, footer and append them all to the body
+- add relevant classes and ids
+
 #### TODOs:
 
 - [x] add test for winning condition in playRound
+- [x] add and style header
+- [x] add and style footer
+- [] add and style board
+- [x] add setupDOM module to build basic HTML skeleton
+- [] add screenController

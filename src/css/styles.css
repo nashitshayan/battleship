@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+	--clr--body: #0a0b02;
+	--clr--primary: #596c3a;
+	/* #989ca5; */
+	--clr--secondary: #c1d06b;
+	--clr--neutral: #;
+	--clr--accent-one: #7d3e00;
+	--clr--accent-two: #f99a00;
+	--ff--primary: 'Space Mono', monospace;
+	--ff--header: 'Rubik Dirt', cursive;
+}
+/* board: primary green, lines on board: accent brown 
+
+ 
+*/
+*::before,
+*,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	font-family: var(--ff--primary);
+	background-color: var(--clr--body);
+}
+header {
+	background-color: var(--clr--primary);
+	font-size: 4rem;
+	font-family: var(--ff--header);
+	text-align: center;
+}
+main {
+	/* background-color: ; */
+}
+footer {
+	background-color: var(--clr--primary);
+	font-size: 1.1rem;
+	padding: 1.25em;
+	text-align: center;
+}
+footer a {
+	text-decoration: none;
+	color: var(--clr--accent-one);
+}
