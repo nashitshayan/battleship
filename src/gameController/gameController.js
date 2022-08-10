@@ -1,4 +1,19 @@
 import { gameboardFactory } from '../gameboardFactory/gameboadFactory';
+const p1Coords = [
+	[2, 0],
+	[1, 3],
+	[7, 3],
+	[4, 7],
+	[8, 8],
+];
+const p2Coords = [
+	[0, 9],
+	[4, 2],
+	[7, 0],
+	[6, 7],
+	[0, 0],
+];
+
 export const gameController = (
 	playerOneName = 'playerOne',
 	playerTwoName = 'CPU',
@@ -23,47 +38,48 @@ export const gameController = (
 			board: playerTwoBoard,
 		},
 	];
+
 	let activePlayer = players[0];
 	const switchTurn = () => {
 		activePlayer = activePlayer === players[0] ? players[1] : players[0];
 	};
 	const getActivePlayer = () => activePlayer;
 
+	//pre determinded ship placement.
+	//TODO:
+	// 1. Add in a way for player to place ships
+	// 2. Add in a way for CPU to randomly place ships.
 	const placeShips = (board, coords) => {
 		ships.forEach((ship, index) => {
 			board.placeShip(ship, coords[index]);
 		});
 	};
-	const p1Coords = [
-		[2, 0],
-		[1, 3],
-		[7, 3],
-		[4, 7],
-		[8, 8],
-	];
-	const p2Coords = [
-		[0, 9],
-		[4, 2],
-		[7, 0],
-		[6, 7],
-		[0, 0],
-	];
 	const placeDummyShipsPlayerOne = () => placeShips(playerOneBoard, p1Coords);
 	const placeDummyShipsPlayerTwo = () => placeShips(playerTwoBoard, p2Coords);
 
+	// to play game on console
 	const printNewRound = () => {
 		console.log(`${activePlayer.name}'s board`);
 		console.log(activePlayer.board.getBoardWithValues());
 		console.log(`${activePlayer.name}'s turn`);
 	};
+
 	const playRound = (coords) => {
 		if (activePlayer.name === 'CPU') {
 			cpuPlay(playerOneBoard);
 		} else {
 			attackBoard(playerTwoBoard, coords);
 		}
+
 		switchTurn();
 		//printNewRound();
+
+		//right after the player's turn,  make the CPU play
+		if (activePlayer.name === 'CPU') playRound();
+
+		// Winning conditions
+		if (playerOneBoard.areAllShipsSunk()) return `${playerTwoName}`;
+		if (playerTwoBoard.areAllShipsSunk()) return `${playerOneName}`;
 	};
 
 	const getRandomCoords = () => [randomNumber(), randomNumber()];

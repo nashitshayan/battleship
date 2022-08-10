@@ -72,4 +72,47 @@ describe('Game Controller', () => {
 		const [x, y] = getRandomCoords();
 		expect(getPlayerOneBoard()[x][y]).toEqual(0);
 	});
+
+	test('playRound should return the name of the winner when all enemy ships have been destroyed', () => {
+		const game = gameController('Nashit');
+		const { playRound, placeDummyShipsPlayerOne, placeDummyShipsPlayerTwo } =
+			game;
+		placeDummyShipsPlayerOne();
+		placeDummyShipsPlayerTwo();
+		/**
+	 * Initial PlayerTwoBoard
+	[1, 1, 0, 0, 0, 0, 0, 0, 0, 1]
+ 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+	[0, 0, 1, 1, 1, 1, 0, 0, 0, 1]
+	[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	[0, 0, 0, 0, 0, 0, 0, 1, 1, 1]
+	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	 */
+		playRound([0, 9]);
+		playRound([1, 9]);
+		playRound([2, 9]);
+		playRound([3, 9]);
+		playRound([4, 9]);
+
+		playRound([4, 2]);
+		playRound([4, 3]);
+		playRound([4, 4]);
+		playRound([4, 5]);
+
+		playRound([7, 0]);
+		playRound([8, 0]);
+		playRound([9, 0]);
+
+		playRound([6, 7]);
+		playRound([6, 8]);
+		playRound([6, 9]);
+
+		playRound([0, 0]);
+
+		expect(playRound([0, 1])).toEqual('Nashit');
+	});
 });

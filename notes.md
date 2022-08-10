@@ -200,3 +200,15 @@ So I've decided that I don't need a player factory. Instead all this would be ma
 - [x] test cpu play function
 - [x] test playerRound function -> when it is playerOne's turns, it allows playerOne to send an attack to playeTwoBoard. Test that the attack is registered by checking the playerTwoBoard
 - [x] test playerRound function -> when it is playerTwo's turns, it allows playerTwo to send an attack to playerOneBoard. Test that the attack is registered by checking the playerTwoBoard
+
+## Aug 10, 2022
+
+I need to start with the UI now. There will be a screenController that will build the UI. Since I'm using webpack, I'll have to build the basic HTML markup using JS, so I will do that in the index.js file. Or maybe have a domSetup module. The screenController will
+
+- initialize the gameController()
+- have an updateScreen method to re render the boards with updated data
+- add event listener on the player board
+
+#### TODOs:
+
+- [x] add test for winning condition in playRound
