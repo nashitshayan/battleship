@@ -1,5 +1,5 @@
 import { gameController } from '../gameController/gameController';
-import { addClass, elem, grab, addId } from '../utils/domHelper';
+import { addClass, elem, grab, addId, setContent } from '../utils/domHelper';
 import * as R from 'ramda';
 export const screenController = () => {
 	const game = gameController();
@@ -16,49 +16,78 @@ export const screenController = () => {
 		const playerTwoBoard = game.getPlayerTwoBoardWithValues();
 		const activePlayer = game.getActivePlayer();
 
-		console.log(activePlayer.name);
-		// console.log(playerOneBoard);
 		dialogBox.textContent = `${activePlayer.name}'s turn...`;
 
 		playerOneBoard.forEach((row, rIndex) => {
 			row.forEach((col, cIndex) => {
-				const cellBtn = R.compose(addClass('cell'))(elem('button'));
-
-				if (playerOneBoard[rIndex][cIndex] === 'x') addId('ship-hit', cellBtn);
-
-				if (playerOneBoard[rIndex][cIndex] === 'o') addId('ship-miss', cellBtn);
-
-				cellBtn.dataset.row = rIndex;
-				cellBtn.dataset.col = cIndex;
-				boardOneDiv.appendChild(cellBtn);
+				addCells(boardOneDiv, playerOneBoard, rIndex, cIndex, true);
 			});
 		});
+
 		playerTwoBoard.forEach((row, rIndex) => {
 			row.forEach((col, cIndex) => {
-				const cellBtn = R.compose(addClass('cell'))(elem('button'));
-
-				if (playerTwoBoard[rIndex][cIndex] === 'x') addId('ship-hit', cellBtn);
-
-				if (playerTwoBoard[rIndex][cIndex] === 'o') addId('ship-miss', cellBtn);
-				cellBtn.dataset.row = rIndex;
-				cellBtn.dataset.col = cIndex;
-				boardTwoDiv.appendChild(cellBtn);
+				addCells(boardTwoDiv, playerTwoBoard, rIndex, cIndex, false);
 			});
 		});
 	};
+
 	const handleBoardClick = (e) => {
 		const row = e.target.dataset.row;
 		const col = e.target.dataset.col;
+		let result;
 
 		if (!row || !col) return;
-		console.log(`row : ${row} and col: ${col}`);
-		game.playRound([row, col]);
+
+		//player's turn
+		const playerOneName = getActivePlayerFromDOM();
+		result = game.playRound([row, col]);
 		updateScreen();
-		setTimeout(() => {
-			game.playRound();
-			updateScreen();
-		}, 2000);
+
+		// check if player one has sunk all enemy ships
+		if (result === playerOneName) handleGameOver(playerOneName);
+		//cpu turn after some time
+		else {
+			setTimeout(() => {
+				const playerTwoName = getActivePlayerFromDOM();
+				game.playRound();
+				updateScreen();
+
+				//check if cpu has all enemy ships
+				if (result === playerTwoName) handleGameOver(playerTwoName);
+			}, 0);
+		}
 	};
+
+	function handleGameOver(winner) {
+		setContent(`The winner is ${winner}`, dialogBox);
+
+		//show all ships of cpu board
+		boardTwoDiv.textContent = '';
+		const playerTwoBoard = game.getPlayerTwoBoardWithValues();
+		playerTwoBoard.forEach((row, rIndex) => {
+			row.forEach((col, cIndex) => {
+				addCells(boardTwoDiv, playerTwoBoard, rIndex, cIndex, true);
+			});
+		});
+	}
+
 	boardTwoDiv.addEventListener('click', handleBoardClick);
 	updateScreen();
 };
+
+function getActivePlayerFromDOM() {
+	return grab('.dialogBox').textContent.split("'")[0];
+}
+
+function addCells(boardDiv, board, rIndex, cIndex, markShips) {
+	const cellBtn = R.compose(addClass('cell'))(elem('button'));
+
+	if (markShips && board[rIndex][cIndex] === 1) addClass('ship', cellBtn);
+
+	if (board[rIndex][cIndex] === 'x') addId('ship-hit', cellBtn);
+
+	if (board[rIndex][cIndex] === 'o') addId('ship-miss', cellBtn);
+	cellBtn.dataset.row = rIndex;
+	cellBtn.dataset.col = cIndex;
+	boardDiv.appendChild(cellBtn);
+}

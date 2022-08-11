@@ -86,6 +86,9 @@ main {
 	border-bottom: 1px solid var(--clr--accent-one);
 	border-right: 1px solid var(--clr--accent-one);
 }
+.ship {
+	background-color: #0a0b02;
+}
 
 #ship-hit {
 	background-color: var(--clr--accent-one);
