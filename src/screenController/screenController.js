@@ -54,7 +54,7 @@ export const screenController = () => {
 
 				//check if cpu has all enemy ships
 				if (result === playerTwoName) handleGameOver(playerTwoName);
-			}, 0);
+			}, 1500);
 		}
 	};
 
