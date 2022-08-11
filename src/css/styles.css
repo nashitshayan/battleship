@@ -81,12 +81,18 @@ main {
 	height: 300px;
 	width: 300px;
 }
-.board > div {
+.cell {
 	background-color: var(--clr--primary);
 	border-bottom: 1px solid var(--clr--accent-one);
 	border-right: 1px solid var(--clr--accent-one);
 }
 
+#ship-hit {
+	background-color: var(--clr--accent-one);
+}
+#ship-miss {
+	background-color: var(--clr--secondary);
+}
 footer {
 	background-color: var(--clr--primary);
 	font-size: 1.2rem;

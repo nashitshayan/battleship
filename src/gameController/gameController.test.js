@@ -21,9 +21,9 @@ describe('Game Controller', () => {
 			[0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
 		];
 		const game = gameController();
-		const { getPlayerOneBoard, placeDummyShipsPlayerOne } = game;
+		const { getPlayerOneBoardWithValues, placeDummyShipsPlayerOne } = game;
 		placeDummyShipsPlayerOne();
-		expect(getPlayerOneBoard()).toEqual(initialPlayerOneBoard);
+		expect(getPlayerOneBoardWithValues()).toEqual(initialPlayerOneBoard);
 	});
 	test('correctly place ships on playerTwoBoard', () => {
 		const initialPlayerTwoBoard = [
@@ -40,9 +40,9 @@ describe('Game Controller', () => {
 		];
 
 		const game = gameController();
-		const { getPlayerTwoBoard, placeDummyShipsPlayerTwo } = game;
+		const { getPlayerTwoBoardWithValues, placeDummyShipsPlayerTwo } = game;
 		placeDummyShipsPlayerTwo();
-		expect(getPlayerTwoBoard()).toEqual(initialPlayerTwoBoard);
+		expect(getPlayerTwoBoardWithValues()).toEqual(initialPlayerTwoBoard);
 	});
 	test('gameController should expose a function to switch player turn', () => {
 		const game = gameController('Nashit');
@@ -53,24 +53,26 @@ describe('Game Controller', () => {
 	});
 	test("When playerOne attacks, mark enemy board as 'x' when hit", () => {
 		const game = gameController('Nashit');
-		const { playRound, getPlayerTwoBoard, placeDummyShipsPlayerTwo } = game;
+		const { playRound, getPlayerTwoBoardWithValues, placeDummyShipsPlayerTwo } =
+			game;
 		placeDummyShipsPlayerTwo();
 		playRound([0, 0]);
-		expect(getPlayerTwoBoard()[0][0]).toEqual('x');
+		expect(getPlayerTwoBoardWithValues()[0][0]).toEqual('x');
 	});
 	test("When playerOne attacks, mark enemy board as 'o' when miss", () => {
 		const game = gameController('Nashit');
-		const { playRound, getPlayerTwoBoard, placeDummyShipsPlayerTwo } = game;
+		const { playRound, getPlayerTwoBoardWithValues, placeDummyShipsPlayerTwo } =
+			game;
 		placeDummyShipsPlayerTwo();
 		playRound([1, 1]);
-		expect(getPlayerTwoBoard()[1][1]).toEqual('o');
+		expect(getPlayerTwoBoardWithValues()[1][1]).toEqual('o');
 	});
 	test('CPU should be able to pick a random coordinate', () => {
 		const game = gameController('Nashit');
-		const { switchTurn, getRandomCoords, getPlayerOneBoard } = game;
+		const { switchTurn, getRandomCoords, getPlayerOneBoardWithValues } = game;
 		switchTurn();
 		const [x, y] = getRandomCoords();
-		expect(getPlayerOneBoard()[x][y]).toEqual(0);
+		expect(getPlayerOneBoardWithValues()[x][y]).toEqual(0);
 	});
 
 	test('playRound should return the name of the winner when all enemy ships have been destroyed', () => {
@@ -93,25 +95,41 @@ describe('Game Controller', () => {
 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	 */
 		playRound([0, 9]);
+		playRound();
 		playRound([1, 9]);
+		playRound();
 		playRound([2, 9]);
+		playRound();
 		playRound([3, 9]);
+		playRound();
 		playRound([4, 9]);
+		playRound();
 
 		playRound([4, 2]);
+		playRound();
 		playRound([4, 3]);
+		playRound();
 		playRound([4, 4]);
+		playRound();
 		playRound([4, 5]);
+		playRound();
 
 		playRound([7, 0]);
+		playRound();
 		playRound([8, 0]);
+		playRound();
 		playRound([9, 0]);
+		playRound();
 
 		playRound([6, 7]);
+		playRound();
 		playRound([6, 8]);
+		playRound();
 		playRound([6, 9]);
+		playRound();
 
 		playRound([0, 0]);
+		playRound();
 
 		expect(playRound([0, 1])).toEqual('Nashit');
 	});

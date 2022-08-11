@@ -75,7 +75,7 @@ export const gameController = (
 		//printNewRound();
 
 		//right after the player's turn,  make the CPU play
-		if (activePlayer.name === 'CPU') playRound();
+		// if (activePlayer.name === 'CPU') playRound();
 
 		// Winning conditions
 		if (playerOneBoard.areAllShipsSunk()) return `${playerTwoName}`;
@@ -93,8 +93,10 @@ export const gameController = (
 		alreadyTargeted.push(randomCoords);
 	};
 	return {
-		getPlayerOneBoard: playerOneBoard.getBoardWithValues,
-		getPlayerTwoBoard: playerTwoBoard.getBoardWithValues,
+		getPlayerOneBoardWithValues: playerOneBoard.getBoardWithValues,
+		getPlayerTwoBoardWithValues: playerTwoBoard.getBoardWithValues,
+		getPlayerOneBoard: playerOneBoard.getBoard,
+		getPlayerTwoBoard: playerTwoBoard.getBoard,
 		placeDummyShipsPlayerOne,
 		placeDummyShipsPlayerTwo,
 		getActivePlayer,
