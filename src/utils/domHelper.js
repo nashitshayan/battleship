@@ -8,10 +8,10 @@ const addClass = R.curry((className, element) => {
 	element.classList.add(className);
 	return element;
 });
-// const addId = R.curry((idName, element) => {
-// 	element.classList.add(className);
-// 	return element;
-// });
+const addId = R.curry((idName, element) => {
+	element.id = idName;
+	return element;
+});
 const attr = R.curry((attrName, attrVal, element) => {
 	element.setAttribute(attrName, attrVal);
 	return element;
@@ -51,6 +51,7 @@ export {
 	grab,
 	chilrenArr,
 	addClass,
+	addId,
 	attr,
 	append,
 	setInnerHTML,

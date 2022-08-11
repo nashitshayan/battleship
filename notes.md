@@ -219,6 +219,15 @@ The setupDOM module should :
 - [x] add test for winning condition in playRound
 - [x] add and style header
 - [x] add and style footer
-- [] add and style board
 - [x] add setupDOM module to build basic HTML skeleton
-- [] add screenController
+
+## Aug 11, 2022
+
+Not much to think about today. Things are pretty straightforward. An update screen pattern will be followed, with every change in state, a function will re render the UI with updated values. This will involve marking the boards as 'miss' and 'hit'. The game winner message wil also be inside this function
+
+#### TODOs:
+
+- [x] add and style board
+- [x] add and style dialog box
+- [] add updateScreen function to screenController
+- [] add eventlistener to cpuBoard, that allows playerOne to attack the board.
