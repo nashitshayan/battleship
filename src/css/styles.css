@@ -87,7 +87,7 @@ main {
 	border: 1px solid var(--clr--primary);
 	border-radius: 8px;
 	max-width: 600px;
-	padding: 3rem;
+	padding: 1.5rem;
 	margin-bottom: 1rem;
 	text-align: center;
 }
