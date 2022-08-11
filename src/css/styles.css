@@ -4,7 +4,7 @@
 	--clr--body: #0a0b02;
 	--clr--primary: #596c3a;
 	--clr--secondary: #c1d06b;
-	--clr--neutral: #fff;
+	--clr--neutral: #cac9c7;
 	--clr--accent-one: #7d3e00;
 	--clr--accent-two: #f99a00;
 	--ff--primary: 'Space Mono', monospace;
@@ -73,8 +73,7 @@ main {
 	padding-bottom: 0.25em;
 }
 .board {
-	border-top: 1px solid var(--clr--accent-one);
-	border-left: 1px solid var(--clr--accent-one);
+	background-color: var(--clr--primary);
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
 	grid-template-rows: repeat(10, 1fr);
@@ -82,12 +81,11 @@ main {
 	width: 300px;
 }
 .cell {
-	background-color: var(--clr--primary);
-	border-bottom: 1px solid var(--clr--accent-one);
-	border-right: 1px solid var(--clr--accent-one);
+	background: none;
+	border: 1px solid var(--clr--neutral);
 }
 .ship {
-	background-color: #0a0b02;
+	background-color: var(--clr--body);
 }
 
 #ship-hit {
