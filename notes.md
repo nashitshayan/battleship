@@ -229,5 +229,6 @@ Not much to think about today. Things are pretty straightforward. An update scre
 
 - [x] add and style board
 - [x] add and style dialog box
-- [] add updateScreen function to screenController
-- [] add eventlistener to cpuBoard, that allows playerOne to attack the board.
+- [x] add updateScreen function to screenController
+- [x] add eventlistener to cpuBoard, that allows playerOne to attack the board.
+- [x] add functionality to handle game over
