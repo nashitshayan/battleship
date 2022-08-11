@@ -66,12 +66,16 @@ export const setupDOM = () => {
 
 	const main = R.compose(append(boardsWrapper))(elem('main'));
 
+	//TODO: add mobile support
+	// then change this message to
+	// "Please turn on landscape mode and rotate your screen to play the game."
 	const screenRotateMessage = R.compose(
 		setContent(
-			'Please turn on landscape mode and rotate your screen to play the game.',
+			'Sorry! For now this game can only be played on a desktop/laptop.',
 		),
 		addClass('screenRotateMessage'),
 	)(elem('div'));
+
 	const footer = R.compose(
 		setInnerHTML(
 			`Made by

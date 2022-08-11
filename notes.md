@@ -228,7 +228,6 @@ Not much to think about today. Things are pretty straightforward. An update scre
 Some additional things I'd like to add for now :
 
 - A 'how to play' dropdown that will entail the game rules and also the color scheme for 'ship', 'ship-hit', and 'ship-miss'
--
 
 #### TODOs:
 

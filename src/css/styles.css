@@ -142,9 +142,12 @@ footer a:hover {
 	color: var(--clr--accent-two);
 }
 
-@media only screen and (orientation: portrait) {
+/* NOTE: I am not adding mobile support for now */
+
+@media (max-width: 900px) {
 	section,
-	main {
+	main,
+	.howToPlayBtn {
 		display: none;
 	}
 	.screenRotateMessage {
@@ -152,9 +155,21 @@ footer a:hover {
 	}
 }
 
-@media only screen and (orientation: landscape) and (max-height: 500px) {
+/* @media only screen and (orientation: portrait) {
 	section,
-	main {
+	main,
+	.howToPlayBtn {
+		display: none;
+	}
+	.screenRotateMessage {
+		display: block;
+	}
+} */
+
+/* @media only screen and (orientation: landscape) and (max-height: 500px) {
+	section,
+	main,
+	.howToPlayBtn {
 		display: block;
 	}
 	.screenRotateMessage {
@@ -180,4 +195,4 @@ footer a:hover {
 	footer {
 		font-size: 0.75rem;
 	}
-}
+} */
