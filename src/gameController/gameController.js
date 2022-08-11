@@ -28,6 +28,8 @@ export const gameController = (
 	const playerOneBoard = gameboardFactory();
 	const playerTwoBoard = gameboardFactory();
 
+	//coords already targeted by CPU (this array is later used by cpuPlay)
+	const alreadyTargeted = [];
 	const players = [
 		{
 			name: playerOneName,
@@ -85,7 +87,6 @@ export const gameController = (
 	const getRandomCoords = () => [randomNumber(), randomNumber()];
 	const attackBoard = (board, coords) => board.receiveAttack(coords);
 	const cpuPlay = (board) => {
-		const alreadyTargeted = [];
 		let randomCoords = getRandomCoords();
 		while (alreadyTargeted.includes(randomCoords))
 			randomCoords = getRandomCoords();
@@ -95,8 +96,6 @@ export const gameController = (
 	return {
 		getPlayerOneBoardWithValues: playerOneBoard.getBoardWithValues,
 		getPlayerTwoBoardWithValues: playerTwoBoard.getBoardWithValues,
-		getPlayerOneBoard: playerOneBoard.getBoard,
-		getPlayerTwoBoard: playerTwoBoard.getBoard,
 		placeDummyShipsPlayerOne,
 		placeDummyShipsPlayerTwo,
 		getActivePlayer,
