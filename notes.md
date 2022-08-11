@@ -225,6 +225,11 @@ The setupDOM module should :
 
 Not much to think about today. Things are pretty straightforward. An update screen pattern will be followed, with every change in state, a function will re render the UI with updated values. This will involve marking the boards as 'miss' and 'hit'. The game winner message wil also be inside this function
 
+Some additional things I'd like to add for now :
+
+- A 'how to play' dropdown that will entail the game rules and also the color scheme for 'ship', 'ship-hit', and 'ship-miss'
+-
+
 #### TODOs:
 
 - [x] add and style board
@@ -232,3 +237,4 @@ Not much to think about today. Things are pretty straightforward. An update scre
 - [x] add updateScreen function to screenController
 - [x] add eventlistener to cpuBoard, that allows playerOne to attack the board.
 - [x] add functionality to handle game over
+- [] add How to Play dropdown tab

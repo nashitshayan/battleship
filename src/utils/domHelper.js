@@ -39,18 +39,23 @@ const setGridTemplate = R.curry((value, element) => {
 	return element;
 });
 
-const on = R.curry((eventType, element, fn) =>
-	element.addEventListener(eventType, fn),
-);
+const on = R.curry((eventType, fn, element) => {
+	element.addEventListener(eventType, fn);
+	return element;
+});
 const off = R.curry((eventType, fn, element) =>
 	element.removeEventListener(eventType, fn),
 );
-
+const toggleClass = R.curry((cName, element) => {
+	element.classList.toggle(cName);
+	return element;
+});
 export {
 	elem,
 	grab,
 	chilrenArr,
 	addClass,
+	toggleClass,
 	addId,
 	attr,
 	append,

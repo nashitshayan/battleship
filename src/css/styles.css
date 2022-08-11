@@ -26,6 +26,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	align-items: center;
 }
 
 header {
@@ -33,6 +34,34 @@ header {
 	font-family: var(--ff--header);
 	font-size: 4rem;
 	text-align: center;
+	width: 100%;
+}
+
+.howToPlayBtn {
+	border: 1px solid var(--clr--primary);
+	border-radius: 8px;
+	color: var(--clr--accent-two);
+	margin-top: 1em;
+	padding: 0.25em 1em;
+	cursor: pointer;
+}
+.howToPlay {
+	background-color: var(--clr--primary);
+	border: 1px solid var(--clr--primary);
+	border-radius: 8px;
+	color: var(--clr--accent-two);
+	margin-top: 1em;
+	padding: 1em;
+	text-align: center;
+}
+.hide {
+	transition: display 2s;
+	display: none;
+}
+.ship-block {
+	display: inline-block;
+	height: 15px;
+	width: 15px;
 }
 
 section,
@@ -83,22 +112,27 @@ main {
 .cell {
 	background: none;
 	border: 1px solid var(--clr--neutral);
+	cursor: pointer;
 }
 .ship {
 	background-color: var(--clr--body);
 }
 
-#ship-hit {
+#ship-hit,
+.ship-hit {
 	background-color: var(--clr--accent-one);
 }
-#ship-miss {
+#ship-miss,
+.ship-miss {
 	background-color: var(--clr--secondary);
 }
+
 footer {
 	background-color: var(--clr--primary);
 	font-size: 1.2rem;
 	padding: 1.25em;
 	text-align: center;
+	width: 100%;
 }
 footer a {
 	color: var(--clr--accent-one);

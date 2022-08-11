@@ -5,10 +5,33 @@ import {
 	setContent,
 	setInnerHTML,
 	append,
+	on,
+	toggleClass,
 } from '../utils/domHelper';
 import * as R from 'ramda';
 export const setupDOM = () => {
 	const header = R.compose(setContent('Battleship'))(elem('header'));
+
+	const howToPlayBtn = R.compose(
+		on('click', toggleHowToPlay),
+		setContent('How to play'),
+		addClass('howToPlayBtn'),
+	)(elem('div'));
+
+	const howToPlayDiv = R.compose(
+		setInnerHTML(
+			`
+		<p>Click on enemy board to send attack.</p> 
+		<p>Color scheme: <span class='ship-block ship'></span> : Ship, <span class='ship-block ship-hit'></span> : Hit, <span class='ship-block ship-miss'></span> : Miss </p>
+		`,
+		),
+		addClass('hide'),
+		addClass('howToPlay'),
+	)(elem('div'));
+
+	function toggleHowToPlay(e) {
+		toggleClass('hide', howToPlayDiv);
+	}
 
 	const dialogBox = R.compose(addClass('dialogBox'))(elem('section'));
 
@@ -62,5 +85,13 @@ export const setupDOM = () => {
 		),
 	)(elem('footer'));
 
-	return [header, screenRotateMessage, dialogBox, main, footer];
+	return [
+		header,
+		howToPlayBtn,
+		howToPlayDiv,
+		screenRotateMessage,
+		dialogBox,
+		main,
+		footer,
+	];
 };
