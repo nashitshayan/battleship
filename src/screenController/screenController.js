@@ -7,13 +7,14 @@ export const screenController = () => {
 	const boardTwoDiv = grab('#boardTwo');
 	const dialogBox = grab('.dialogBox');
 	game.placeDummyShipsPlayerOne();
-	game.placeDummyShipsPlayerTwo();
+	game.randomlyPlaceShipsCPU();
 
 	const updateScreen = () => {
 		boardOneDiv.textContent = '';
 		boardTwoDiv.textContent = '';
 		const playerOneBoard = game.getPlayerOneBoardWithValues();
 		const playerTwoBoard = game.getPlayerTwoBoardWithValues();
+
 		const activePlayer = game.getActivePlayer();
 
 		dialogBox.textContent = `${activePlayer.name}'s turn...`;

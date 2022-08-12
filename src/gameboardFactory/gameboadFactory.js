@@ -23,30 +23,31 @@ export const gameboardFactory = () => {
 		// else: place the ship objects
 
 		if (axis === 'vertical') {
-			if (x_coord + length - 1 > 9) return;
-			if (isVerticalOverlap(x_coord)) return;
+			if (x_coord + length - 1 > 9) return -1;
+
+			if (isVerticalOverlap(x_coord)) return -1;
 
 			for (let i = 0; i < length; i++)
 				board[x_coord + i][y_coord] = shipFactory(name);
 		}
 		if (axis === 'horizontal') {
-			if (y_coord + length - 1 > 9) return;
-			if (isHorizontalOverlap(y_coord)) return;
+			if (y_coord + length - 1 > 9) return -1;
+
+			if (isHorizontalOverlap(y_coord)) return -1;
 
 			for (let i = 0; i < length; i++)
 				board[x_coord][y_coord + i] = shipFactory(name);
 		}
-
 		//util functions
 		function isVerticalOverlap(x) {
-			for (let i = x; i < length; i++) {
-				if (typeof board[i][y_coord] === 'object') return true;
+			for (let i = 0; i < length; i++) {
+				if (typeof board[x_coord + i][y_coord] === 'object') return true;
 			}
 			return false;
 		}
 		function isHorizontalOverlap(y) {
-			for (let i = y; i < length; i++) {
-				if (typeof board[x_coord][i] === 'object') return true;
+			for (let i = 0; i < length; i++) {
+				if (typeof board[x_coord][y_coord + i] === 'object') return true;
 			}
 			return false;
 		}

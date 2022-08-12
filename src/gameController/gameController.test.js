@@ -69,9 +69,9 @@ describe('Game Controller', () => {
 	});
 	test('CPU should be able to pick a random coordinate', () => {
 		const game = gameController('Nashit');
-		const { switchTurn, getRandomCoords, getPlayerOneBoardWithValues } = game;
+		const { switchTurn, getRandomTarget, getPlayerOneBoardWithValues } = game;
 		switchTurn();
-		const [x, y] = getRandomCoords();
+		const [x, y] = getRandomTarget();
 		expect(getPlayerOneBoardWithValues()[x][y]).toEqual(0);
 	});
 

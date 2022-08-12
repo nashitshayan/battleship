@@ -236,4 +236,30 @@ Some additional things I'd like to add for now :
 - [x] add updateScreen function to screenController
 - [x] add eventlistener to cpuBoard, that allows playerOne to attack the board.
 - [x] add functionality to handle game over
-- [] add How to Play dropdown tab
+- [x] add How to Play dropdown tab
+
+## Aug 12, 2022
+
+Alright, my game is up and running. Now it's time for adding more features :
+
+- Random ship placement of CPU
+  - I already have a getRandomCords fn that returns an array [x,y], where x,y are between 0-9 (inclusive).
+  - Things to take care of :
+    - Not use same coords for another ship
+    - The coords for one ship shouldn't intercept with the placement of another
+  - Just like alreadyTargeted array, I can have an alreadyPlaced array.
+    - Loop through the array of ships, for each ship, fire getRandomCords
+      - if the returned coords are in alreadyPlaced, then fire getRandomCords again, otherwise push it into cpuCords array.
+      - Also, push them to alreadyPlaced
+      - then based on the axis, also push the coords that the ship will occupy into alreadyPlaced
+  - The above idea was a disaster lol. I later came to know that my placeShip function in gameBoard factory has checks that make sure that ship isn't placed where it will either go over the edge or overlap with other ships.
+  - So all I had to do was make placeShip return -1 whenever the coords don't pass the above two checks, then based on this -1 value, I call the placeShip for the same ship again with new coords.
+- Player gets to place ships
+- Smarted AI (if attack is 'hit' then try adjacent cells)
+- Mobile support
+  - instead of 'click', there would be 'touch' event
+
+#### TODOs:
+
+- [ ] Implement random CPU ship placement
+- [ ] test it by reloading the game and observe the ship placement on cpu board
