@@ -103,6 +103,7 @@ export const gameController = (
 		attackBoard(board, randomCoords);
 		alreadyTargeted.push(randomCoords);
 	};
+
 	return {
 		getPlayerOneBoardWithValues: playerOneBoard.getBoardWithValues,
 		getPlayerTwoBoardWithValues: playerTwoBoard.getBoardWithValues,
@@ -117,22 +118,22 @@ export const gameController = (
 	};
 	function getRandomTarget() {
 		let randomCoords = [randomNumber(), randomNumber()];
-		let checkPresent = alreadyTargeted.map(
+		let checkPresent = alreadyTargeted.some(
 			(coords) =>
-				coords.includes(randomCoords[0]) && coords.includes(randomCoords[1]),
+				coords[0] === randomCoords[0] && coords[1] === randomCoords[1],
 		);
-		if (checkPresent.includes(true)) getRandomTarget();
-		return randomCoords;
+		if (checkPresent) return getRandomTarget();
+		else return randomCoords;
 	}
 
 	function getRandomCoords() {
 		let randomCoords = [randomNumber(), randomNumber()];
-		let checkPresent = alreadyPlaced.map(
+		let checkPresent = alreadyPlaced.some(
 			(coords) =>
-				coords.includes(randomCoords[0]) && coords.includes(randomCoords[1]),
+				coords[0] === randomCoords[0] && coords[1] === randomCoords[1],
 		);
-		if (checkPresent.includes(true)) getRandomTarget();
-		return randomCoords;
+		if (checkPresent) return getRandomCoords();
+		else return randomCoords;
 	}
 };
 

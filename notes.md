@@ -261,5 +261,15 @@ Alright, my game is up and running. Now it's time for adding more features :
 
 #### TODOs:
 
-- [ ] Implement random CPU ship placement
-- [ ] test it by reloading the game and observe the ship placement on cpu board
+- [x] Implement random CPU ship placement
+- [x] test it by reloading the game and observe the ship placement on cpu board
+
+## Aug 13, 2022
+
+There's two bugs that I've noticed that I gotta fix. One is that the CPU is attacking same coords again. Second is that cells remain clickable and hence continue to function even after gameover.
+
+#### TODOs:
+
+- [x] make getRandomTargets work properly
+- [ ] make cells unclickable after a click
+- [ ] remove event listener from board after gameover
