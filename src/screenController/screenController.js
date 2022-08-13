@@ -53,7 +53,7 @@ export const screenController = () => {
 		else {
 			setTimeout(() => {
 				const playerTwoName = getActivePlayerFromDOM();
-				game.playRound();
+				result = game.playRound();
 				updateScreen();
 
 				//check if cpu has all enemy ships
