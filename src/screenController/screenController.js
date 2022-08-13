@@ -73,6 +73,7 @@ export const screenController = () => {
 				addCells(boardTwoDiv, playerTwoBoard, rIndex, cIndex, true);
 			});
 		});
+		boardTwoDiv.removeEventListener('click', handleBoardClick);
 	}
 
 	boardTwoDiv.addEventListener('click', handleBoardClick);
