@@ -33,11 +33,14 @@ export const screenController = () => {
 	};
 
 	const handleBoardClick = (e) => {
-		const row = e.target.dataset.row;
-		const col = e.target.dataset.col;
+		const cell = e.target;
+		const row = cell.dataset.row;
+		const col = cell.dataset.col;
 		let result;
 
 		if (!row || !col) return;
+		//check if cell has already been attacked
+		if (cell.id) return;
 
 		//player's turn
 		const playerOneName = getActivePlayerFromDOM();

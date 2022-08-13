@@ -271,5 +271,5 @@ There's two bugs that I've noticed that I gotta fix. One is that the CPU is atta
 #### TODOs:
 
 - [x] make getRandomTargets work properly
-- [ ] make cells unclickable after a click
+- [x] make cells unclickable after a click
 - [ ] remove event listener from board after gameover
