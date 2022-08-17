@@ -242,7 +242,7 @@ Some additional things I'd like to add for now :
 
 Alright, my game is up and running. Now it's time for adding more features :
 
-- Random ship placement of CPU
+- Random ship placement of CPU (update: DONE)
   - I already have a getRandomCords fn that returns an array [x,y], where x,y are between 0-9 (inclusive).
   - Things to take care of :
     - Not use same coords for another ship
@@ -255,7 +255,7 @@ Alright, my game is up and running. Now it's time for adding more features :
   - The above idea was a disaster lol. I later came to know that my placeShip function in gameBoard factory has checks that make sure that ship isn't placed where it will either go over the edge or overlap with other ships.
   - So all I had to do was make placeShip return -1 whenever the coords don't pass the above two checks, then based on this -1 value, I call the placeShip for the same ship again with new coords.
 - Player gets to place ships
-- Smarted AI (if attack is 'hit' then try adjacent cells)
+- Smarter AI (if attack is 'hit' then try adjacent cells)
 - Mobile support
   - instead of 'click', there would be 'touch' event
 
@@ -273,3 +273,21 @@ There's two bugs that I've noticed that I gotta fix. One is that the CPU is atta
 - [x] make getRandomTargets work properly
 - [x] make cells unclickable after a click
 - [x] remove event listener from board after gameover
+
+## Aug 16, 2022
+
+- Today I will try to implement the Smarter AI feature inShaAllah.
+- When the enemy ship is hit, it will try adjacent cells.
+- Will be nice to add tests for this as well. Maybe.
+- gameController calls board.receiveAttack. When enemy ship is hit, we return true otherwise it returns undefined. This info can be accessed inside the gameController. What we're currently doing is that CPU and player turns alternate. Player passes in coords and CPU generates them randomly.
+- Based on whether or not previous attack was successfull, we can have CPU pass attacks to coords which are adjacent to the previous passed coords.
+- Say the previous coord which hit the ship was (2,0), then we'd want the CPU to send attack to (1,0), (2,1), and (3,0).
+- If one of these is a successful attack, CPU should send attack in _that_ direction again. For eg: initially (2,0) was hit, then (1,0) was hit, then CPU should attack (0,0).
+- Ugh this is harder than I thought.
+- All the while, before sending any attack on some coords, it should make sure that no attack was sent there before.
+
+I'm pausing on this Smarter AI feature for now.
+
+#### TODOs:
+
+-
